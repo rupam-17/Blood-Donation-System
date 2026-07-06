@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard — Blood Center</title>
+  <link rel="stylesheet" href="/css/admin.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <i class='bx bxs-droplet'></i>
+    <span>Blood<strong>Center</strong></span>
+  </div>
+
+  <p class="sidebar-label">MAIN</p>
+  <nav>
+    <a href="#" class="nav-item active" data-section="dashboard"><i class='bx bx-home-alt'></i> Dashboard</a>
+    <a href="#" class="nav-item" data-section="donors"><i class='bx bx-group'></i> Manage Donors</a>
+    <a href="#" class="nav-item" data-section="search"><i class='bx bx-search-alt'></i> Search Donors</a>
+    <a href="#" class="nav-item" data-section="requests"><i class='bx bx-heart'></i> Blood Requests
+      <span class="nav-badge" id="reqBadge"></span>
+    </a>
+    <a href="#" class="nav-item" data-section="donations"><i class='bx bx-droplet'></i> Record Donation</a>
+    <a href="#" class="nav-item" data-section="messages"><i class='bx bx-envelope'></i> Contact Messages
+      <span class="nav-badge" id="msgBadge"></span>
+    </a>
+  </nav>
+
+  <p class="sidebar-label">ADMIN</p>
+  <nav>
+    <a href="#" class="nav-item" data-section="admins"><i class='bx bx-shield-alt-2'></i> All Admins</a>
+    <a href="#" class="nav-item" data-section="myaccount"><i class='bx bx-user-circle'></i> My Account</a>
+    <a href="/index.html" class="nav-item"><i class='bx bx-globe'></i> View Website</a>
+    <a href="login.html" class="nav-item"><i class='bx bx-log-out'></i> Logout</a>
+  </nav>
+
+  
+  <div class="sidebar-date" id="topbarDate"></div> 
+  
+
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn"><i class='bx bx-menu'></i></button>
+    <h2 class="page-title" id="pageTitle">Dashboard</h2>
+    <div class="topbar-right">
+      <div class="topbar-user">
+        <div class="user-avatar">KB</div>
+        <div><p class="user-name">Admin</p><p class="user-role">Super Admin</p></div>
+      </div>    
+      <div class="notif-wrap"><i class='bx bx-bell'></i><span class="notif-dot"></span></div>
+    </div>
+  </header>
+
+  <div class="content">
+
+
+    <!-- ===== DASHBOARD ===== -->
+    <section class="section active" id="section-dashboard">
+      <div class="section-head">
+        <div><h1>Dashboard</h1><p>Welcome back, Admin.</p></div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card" style="--c:#C0152A">
+          <div class="stat-icon"><i class='bx bx-group'></i></div>
+          <div><p class="stat-label">Total Donors</p><h2 class="stat-num" data-target="12">0</h2></div>
+        </div>
+        <div class="stat-card" style="--c:#16a34a">
+          <div class="stat-icon"><i class='bx bx-check-circle'></i></div>
+          <div><p class="stat-label">Available</p><h2 class="stat-num" data-target="8">0</h2></div>
+        </div>
+        <div class="stat-card" style="--c:#ea580c">
+          <div class="stat-icon"><i class='bx bx-heart'></i></div>
+          <div><p class="stat-label">Pending Requests</p><h2 class="stat-num" data-target="5">0</h2></div>
+        </div>
+        <div class="stat-card" style="--c:#7c3aed">
+          <div class="stat-icon"><i class='bx bx-envelope'></i></div>
+          <div><p class="stat-label">New Messages</p><h2 class="stat-num" data-target="3">0</h2></div>
+        </div>
+      </div>
+
+      <div class="dash-row">
+        <div class="card">
+          <div class="card-head"><h3>Donors by Blood Group</h3></div>
+          <div id="bloodBars"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>Recent Activity</h3></div>
+          <ul class="activity-list" id="activityList"></ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>Recent Blood Requests</h3>
+          <button class="link-btn" data-goto="requests">View All →</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>#</th><th>Patient</th><th>Blood</th><th>Location</th><th>Date</th><th>Urgency</th><th>Status</th></tr></thead>
+            <tbody id="dashReqBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== MANAGE DONORS ===== -->
+    <section class="section" id="section-donors">
+      <div class="section-head">
+        <div><h1>Manage Donors</h1><p>Add, edit and delete donor records.</p></div>
+        <button class="btn-red" id="addDonorBtn"><i class='bx bx-plus'></i> Add Donor</button>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="filters">
+            <div class="search-box"><i class='bx bx-search'></i><input type="text" id="donorSearch" placeholder="Search name, phone, location..."/></div>
+            <select id="donorBloodFilter" class="select">
+              <option value="">All Blood Groups</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+            <select id="donorAvailFilter" class="select">
+              <option value="">All Status</option>
+              <option value="Available">Available</option>
+              <option value="Not Available">Not Available</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>Photo</th><th>Name</th><th>Age</th><th>Blood</th><th>Phone</th><th>Email</th><th>Location</th><th>Last Donated</th><th>Next Eligible</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="donorBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="donorPages"></div>
+      </div>
+    </section>
+
+
+    <!-- ===== SEARCH DONORS ===== -->
+    <section class="section" id="section-search">
+      <div class="section-head">
+        <div><h1>Search Donors</h1><p>Find donors by blood group and location.</p></div>
+      </div>
+      <div class="card">
+        <div class="search-form-row">
+          <div class="field-group"><label>Blood Group</label>
+            <select id="srchBlood" class="select big">
+              <option value="">Any</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+          </div>
+          <div class="field-group"><label>Location</label>
+            <input type="text" id="srchLocation" class="input big" placeholder="e.g. Guwahati"/>
+          </div>
+          <div class="field-group"><label>Availability</label>
+            <select id="srchAvail" class="select big">
+              <option value="">Any</option>
+              <option value="Available">Available</option>
+              <option value="Not Available">Not Available</option>
+            </select>
+          </div>
+          <button class="btn-red" id="srchBtn" style="align-self:flex-end"><i class='bx bx-search'></i> Search</button>
+        </div>
+      </div>
+      <div id="srchResultsWrap" style="display:none">
+        <div class="results-header">
+          <p id="srchCount"></p>
+          <button class="btn-outline-sm" id="srchClear">Clear</button>
+        </div>
+        <div class="donor-cards-grid" id="srchGrid"></div>
+      </div>
+      <div class="empty-state" id="srchEmpty" style="display:none">
+        <i class='bx bx-search-alt'></i><h3>No donors found</h3><p>Try different filters.</p>
+      </div>
+    </section>
+
+
+    <!-- ===== BLOOD REQUESTS ===== -->
+    <section class="section" id="section-requests">
+      <div class="section-head">
+        <div><h1>Blood Requests</h1><p>Manage and respond to all incoming requests.</p></div>
+      </div>
+      <div class="card">
+        <div class="card-head">
+          <div class="filters">
+            <div class="search-box"><i class='bx bx-search'></i><input type="text" id="reqSearch" placeholder="Search patient, location..."/></div>
+            <select id="reqStatusFilter" class="select">
+              <option value="">All Status</option>
+              <option>Pending</option><option>Fulfilled</option><option>Cancelled</option>
+            </select>
+            <select id="reqBloodFilter" class="select">
+              <option value="">All Blood Groups</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>#</th><th>Patient</th><th>Blood</th><th>Hospital</th><th>Location</th><th>Contact</th><th>Date</th><th>Urgency</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="reqBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="reqPages"></div>
+      </div>
+    </section>
+
+
+    <!-- ===== RECORD DONATION ===== -->
+    <section class="section" id="section-donations">
+      <div class="section-head">
+        <div><h1>Record Donation</h1><p>Log a blood donation for a registered donor.</p></div>
+      </div>
+      <div class="record-layout">
+        <div class="card" style="max-width:480px">
+          <h3 class="card-title-sm">Add Donation Record</h3>
+          <div class="msg-box" id="donRecMsg"></div>
+          <form id="donRecForm">
+            <div class="field-group" style="margin-bottom:0.9rem">
+              <label>Select Donor <span class="star">*</span></label>
+
+              <input id="drDonorSearch" class="input" style="width:100%;margin-bottom:0.55rem" list="drDonorList" placeholder="Search donor name / blood / phone"/>
+              <datalist id="drDonorList"></datalist>
+              <select id="drDonor" class="select" style="width:100%">
+                <option value="" disabled selected>Choose donor...</option>
+              </select>
+            </div>
+            <div class="two-col-sm">
+              <div class="field-group">
+                <label>Donation Date <span class="star">*</span></label>
+                <input type="date" id="drDate" class="input" style="width:100%"/>
+              </div>
+              <div class="field-group">
+                <label>Units Donated <span class="star">*</span></label>
+                <input type="number" id="drUnits" class="input" style="width:100%" placeholder="e.g. 1" min="1" max="5"/>
+              </div>
+            </div>
+            <div class="field-group" style="margin:0.9rem 0">
+              <label>Hospital / Location <span class="star">*</span></label>
+              <input type="text" id="drLocation" class="input" style="width:100%" placeholder="e.g. Gauhati Medical College"/>
+            </div>
+            <div class="field-group" style="margin-bottom:1rem">
+              <label>Notes</label>
+              <textarea id="drNotes" class="input" rows="2" style="width:100%;resize:vertical" placeholder="Any additional notes..."></textarea>
+            </div>
+            <button type="submit" class="btn-red"><i class='bx bx-save'></i> Record Donation</button>
+          </form>
+        </div>
+
+        <div class="card" style="flex:1">
+          <h3 class="card-title-sm">Recent Donation Records</h3>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>#</th><th>Donor</th><th>Blood</th><th>Date</th><th>Location</th><th>Units</th></tr></thead>
+              <tbody id="donRecBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== CONTACT MESSAGES ===== -->
+    <section class="section" id="section-messages">
+      <div class="section-head">
+        <div><h1>Contact Messages</h1><p>Messages submitted via the homepage contact form.</p></div>
+        <button class="btn-outline" id="markMsgsRead">Mark All Read</button>
+      </div>
+      <div class="card">
+        <div class="filters" style="margin-bottom:1rem">
+          <select id="msgFilter" class="select">
+            <option value="">All Messages</option>
+            <option value="unread">Unread</option>
+            <option value="read">Read</option>
+          </select>
+        </div>
+        <div id="messagesList"></div>
+      </div>
+    </section>
+
+
+    <!-- ===== ALL ADMINS ===== -->
+    <section class="section" id="section-admins">
+      <div class="section-head">
+        <div><h1>All Admins</h1><p>View all admin accounts and create new ones.</p></div>
+        <button class="btn-red" id="createAdminBtn"><i class='bx bx-plus'></i> Create Admin</button>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table">
+            <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Role</th><th>Created</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="adminsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== MY ACCOUNT ===== -->
+    <section class="section" id="section-myaccount">
+      <div class="section-head">
+        <div><h1>My Account</h1><p>Update your admin profile and password.</p></div>
+      </div>
+      <div class="profile-layout">
+        <div class="card" style="max-width:480px;flex:1">
+          <h3 class="card-title-sm">Update Profile</h3>
+          <div class="msg-box" id="myAccMsg"></div>
+          <form id="myAccForm">
+            <div class="two-col-sm">
+              <div class="field-group"><label>Full Name</label><input type="text" id="myName" class="input" style="width:100%" value="Admin User"/></div>
+              <div class="field-group"><label>Email</label><input type="email" id="myEmail" class="input" style="width:100%" value="admin@bloodcenter.in"/></div>
+            </div>
+            <div class="field-group" style="margin-top:0.9rem"><label>Phone</label><input type="tel" id="myPhone" class="input" style="width:100%" value="9876543210"/></div>
+            <div class="field-group" style="margin:0.9rem 0">
+              <label>Status</label>
+              <select id="myStatus" class="select" style="width:100%">
+                <option value="Active">Active</option>
+                <option value="Inactive">Inactive</option>
+              </select>
+            </div>
+
+            <div class="field-group" style="margin:0.9rem 0">
+              <label>Profile Photo</label>
+              <input type="file" id="myPhotoFile" accept="image/*" class="input" style="width:100%">
+            </div>
+
+            <button type="submit" class="btn-red"><i class='bx bx-save'></i> Save Changes</button>
+          </form>
+        </div>
+        <div class="card" style="max-width:400px;flex:1">
+          <h3 class="card-title-sm">Change Password</h3>
+          <div class="msg-box" id="myPassMsg"></div>
+          <form id="myPassForm">
+            <div class="field-group" style="margin-bottom:0.9rem"><label>Current Password</label><input type="password" id="myOldPass" class="input" style="width:100%" placeholder="Current password"/></div>
+            <div class="field-group" style="margin-bottom:0.9rem"><label>New Password</label><input type="password" id="myNewPass" class="input" style="width:100%" placeholder="Min 6 characters"/></div>
+            <div class="field-group" style="margin-bottom:1rem"><label>Confirm New Password</label><input type="password" id="myConfPass" class="input" style="width:100%" placeholder="Repeat new password"/></div>
+            <button type="submit" class="btn-red"><i class='bx bx-lock'></i> Update Password</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+  </div><!-- end .content -->
+</div><!-- end .main -->
+
+
+<!-- MODAL: Add/Edit Donor (2-step) -->
+<div class="modal-overlay" id="donorModal">
+  <div class="modal modal-lg">
+    <div class="modal-head">
+      <h2 id="donorModalTitle">Add New Donor</h2>
+      <button class="modal-close" id="donorModalClose"><i class='bx bx-x'></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="steps-bar">
+               
+      </div>
+      <!-- Step 1 -->
+      <div id="step1Content">
+        <div class="photo-row">
+          <div class="photo-preview" id="donorPhotoPreview"><i class='bx bx-user'></i></div>
+          <div><label for="donorPhotoFile" class="photo-label"><i class='bx bx-camera'></i> Upload Photo</label>
+          <input type="file" id="donorPhotoFile" accept="image/*"/>
+          <p style="font-size:0.7rem;color:#aaa;margin-top:3px">Optional · Max 2MB</p></div>
+        </div>
+        <div class="form-grid">
+          <div class="field-group"><label>Full Name <span class="star">*</span></label><input type="text" id="mName" placeholder="Full name"/></div>
+          <div class="field-group"><label>Age <span class="star">*</span></label><input type="number" id="mAge" placeholder="18–65" min="18" max="65"/></div>
+          <div class="field-group"><label>Blood Group <span class="star">*</span></label>
+            <select id="mBlood"><option value="" disabled selected>Select</option>
+              <option>A+</option><option>A-</option><option>B+</option><option>B-</option>
+              <option>AB+</option><option>AB-</option><option>O+</option><option>O-</option>
+            </select>
+          </div>
+          <div class="field-group"><label>Phone <span class="star">*</span></label><input type="tel" id="mPhone" placeholder="10-digit number"/></div>
+          <div class="field-group"><label>Email</label><input type="email" id="mEmail" placeholder="donor@email.com"/></div>
+          <div class="field-group"><label>Location <span class="star">*</span></label><input type="text" id="mLocation" placeholder="City / Area"/></div>
+          <div class="field-group"><label>Last Donated</label><input type="date" id="mLastDonated"/></div>
+          <!-- <div class="field-group"><label>Availability</label>
+            <select id="mStatus"><option value="Available">Available</option><option value="Not Available">Not Available</option></select>
+          </div> -->
+        </div>
+        
+
+        <p class="form-error" id="step1Err"></p>
+        <div class="modal-foot"><button class="btn-outline" id="donorModalCancel">Cancel</button><button class="btn-red" id="donorNextBtn">Send OTP →</button></div>
+      </div>
+      <!-- Step 2 -->
+      <div id="step2Content" style="display:none">
+        <div class="otp-wrap">
+          <div class="otp-icon"><i class='bx bx-message-square-dots'></i></div>
+          <h3>OTP Verification</h3>
+          <p id="otpMsg">OTP sent to donor's phone number.</p>
+          <div class="otp-inputs" id="otpInputs">
+            <input type="text" class="otp-digit" maxlength="1"/><input type="text" class="otp-digit" maxlength="1"/>
+            <input type="text" class="otp-digit" maxlength="1"/><input type="text" class="otp-digit" maxlength="1"/>
+            <input type="text" class="otp-digit" maxlength="1"/><input type="text" class="otp-digit" maxlength="1"/>
+          </div>
+          <div class="otp-hint"><i class='bx bx-info-circle'></i> Demo OTP: <strong>123456</strong></div>
+          <p class="form-error" id="otpErr"></p>
+          <div class="modal-foot" style="margin-top:1.2rem">
+            <button class="btn-outline" id="otpBackBtn">← Back</button>
+            <button class="btn-red" id="otpVerifyBtn">Verify & Save</button>
+          </div>
+          <p style="text-align:center;font-size:0.78rem;color:#aaa;margin-top:0.7rem">
+            Didn't receive it? <button type="button" class="resend-btn" id="resendOtp">Resend OTP</button>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL: View Request -->
+<div class="modal-overlay" id="reqModal">
+  <div class="modal modal-lg">
+    <div class="modal-head"><h2>Request Details</h2><button class="modal-close" id="reqModalClose"><i class='bx bx-x'></i></button></div>
+    <div class="modal-body" id="reqModalBody"></div>
+    <div class="modal-foot">
+      <button class="btn-outline" id="reqModalCancel">Close</button>
+      <button class="btn-outline" id="reqFindDonorBtn"><i class='bx bx-search'></i> Find Donor</button>
+      <button class="btn-red" id="reqCancelBtn"><i class='bx bx-x'></i> Cancel Request</button>
+      <button class="btn-green" id="reqFulfillBtn"><i class='bx bx-check'></i> Mark Fulfilled</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL: Notify Donors -->
+<div class="modal-overlay" id="notifyDonorModal">
+  <div class="modal modal-lg">
+    <div class="modal-head">
+      <h2>Notify Matching Donors</h2>
+      <button class="modal-close" id="notifyDonorModalClose"><i class='bx bx-x'></i></button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-wrap:wrap;gap:0.75rem;justify-content:space-between;align-items:center;margin-bottom:1rem">
+        <div>
+          <p id="notifyDonorSummary" style="margin:0;font-size:0.92rem;font-weight:700"></p>
+          <p id="notifyDonorCount" style="margin:0.25rem 0 0;color:var(--text-soft);font-size:0.8rem"></p>
+        </div>
+        <button class="btn-red" id="notifyAllDonorsBtn"><i class='bx bx-mail-send'></i> Notify All</button>
+      </div>
+      <div class="table-wrap">
+        <table class="table">
+          <thead><tr><th>Name</th><th>City</th><th>Phone No.</th><th>Email</th><th>Mail</th></tr></thead>
+          <tbody id="notifyDonorTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" id="notifyDonorModalCancel">Close</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL: Create Admin -->
+<div class="modal-overlay" id="adminModal">
+  <div class="modal">
+    <div class="modal-head"><h2>Create Admin</h2><button class="modal-close" id="adminModalClose"><i class='bx bx-x'></i></button></div>
+    <div class="modal-body">
+      <div class="msg-box" id="createAdminMsg"></div>
+      <div class="form-grid">
+        <div class="field-group"><label>Full Name <span class="star">*</span></label><input type="text" id="anName" placeholder="Admin's name"/></div>
+        <div class="field-group"><label>Email <span class="star">*</span></label><input type="email" id="anEmail" placeholder="admin@email.com"/></div>
+        <div class="field-group"><label>Phone <span class="star">*</span></label><input type="tel" id="anPhone" placeholder="Phone Number"/></div>
+
+      <div class="field-group"><label>City <span class="star">*</span></label><input type="text" id="adminCity" placeholder="Admin's City"/></div>
+
+
+      <div class="field-group"><label>Date Of Birth <span class="star">*</span></label><input type="date" id="adminDob" placeholder="Admins's DOB"/></div>
+
+        <div class="field-group"><label>Role</label>
+          <select id="anRole"><option value="Admin">Admin</option></select>
+        </div>
+        <div class="field-group"><label>Password <span class="star">*</span></label><input type="password" id="anPass" placeholder="Set password"/></div>
+        <div class="field-group"><label>Confirm Password <span class="star">*</span></label><input type="password" id="anConf" placeholder="Repeat password"/></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" id="adminModalCancel">Cancel</button>
+      <button class="btn-red" id="saveAdminBtn"><i class='bx bx-shield-plus'></i> Create Admin</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL: View Message -->
+<div class="modal-overlay" id="msgModal">
+  <div class="modal">
+    <div class="modal-head"><h2>Contact Message</h2><button class="modal-close" id="msgModalClose"><i class='bx bx-x'></i></button></div>
+    <div class="modal-body" id="msgModalBody"></div>
+    <div class="modal-foot"><button class="btn-outline" id="msgModalCancel">Close</button><button class="btn-red" id="msgDeleteBtn"><i class='bx bx-trash'></i> Delete</button></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal" style="max-width:420px">
+    <div class="modal-head">
+      <h2>Confirm Action</h2>
+      <button class="modal-close" id="confirmModalClose"><i class='bx bx-x'></i></button>
+    </div>
+    <div class="modal-body">
+      <p id="confirmModalText" style="font-size:0.92rem;color:var(--text);line-height:1.6;"></p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" id="confirmModalCancel">Cancel</button>
+      <button class="btn-red" id="confirmModalYes">Yes, Delete</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="toast" id="toast"></div>
+<script src="/js/admin.js"></script>
+</body>
+</html>

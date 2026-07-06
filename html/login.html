@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — Blood Center</title>
+  <link rel="stylesheet" href="/css/auth.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</head>
+<body>
+
+<div class="auth-card">
+
+  <!-- Logo -->
+  <a href="/index.html" class="auth-logo">
+    <div class="auth-logo-icon"><i class='bx bxs-droplet'></i></div>
+    <span class="auth-logo-text">Blood<span>Center</span></span>
+  </a>
+
+  <h2 class="auth-title">Welcome Back</h2>
+  <p class="auth-sub">Login to your account</p>
+
+  <!-- User / Admin toggle -->
+  <div class="login-toggle">
+    <button class="toggle-btn active" id="userTab">
+      <i class='bx bx-user'></i> Donor Login
+    </button>
+    <button class="toggle-btn admin-btn" id="adminTab">
+      <i class='bx bx-shield-alt-2'></i> Admin Login
+    </button>
+  </div>
+
+  <div class="msg-box" id="loginMsg"></div>
+
+  <form id="loginForm">
+
+    <div class="input-group">
+      <label>Email or Phone Number</label>
+      <div class="input-wrap">
+        <i class='bx bx-user'></i>
+        <input type="text" id="loginId" name="identifier" placeholder="Enter email or phone"/>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Password</label>
+      <div class="input-wrap">
+        <i class='bx bx-lock'></i>
+        <input type="password" id="loginPass" name="password" placeholder="Enter your password"/>
+        <button type="button" class="eye-btn" id="togglePass">
+          <i class='bx bx-hide'></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="row-between">
+      <label class="check-label">
+        <input type="checkbox"/> Remember me
+      </label>
+      <a href="forgot-pass.html?role=donor" class="forgot-link" id="forgotLink">Forgot Password?</a>
+    </div>
+
+    <!-- reCAPTCHA -->
+    <div class="g-recaptcha" data-sitekey="6LdSw4IsAAAAANBnFoG56JSh3QCgX4U8LCmCvYXB"></div>
+    <br>
+    
+    <button type="submit" class="submit-btn">Login</button>
+
+    <p class="switch-link">
+      Don't have an account? <a href="register.html">Register as Donor</a>
+    </p>
+
+  </form>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="/js/login.js"></script>
+</body>
+</html>

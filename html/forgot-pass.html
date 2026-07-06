@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Forgot Password — Blood Center</title>
+  <link rel="stylesheet" href="/css/auth.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+<div class="auth-card">
+
+  <a href="index.html" class="auth-logo">
+    <div class="auth-logo-icon"><i class='bx bxs-droplet'></i></div>
+    <span class="auth-logo-text">Blood<span>Center</span></span>
+  </a>
+
+  <h2 class="auth-title">Forgot Password?</h2>
+  <p class="auth-sub">Enter your email and we'll send a reset OTP</p>
+
+  <div class="msg-box" id="forgotMsg"></div>
+
+  <form id="forgotForm">
+
+    <div class="input-group">
+      <label>Email Address</label>
+      <div class="input-wrap">
+        <i class='bx bx-envelope'></i>
+        <input type="text" id="forgotEmail" placeholder="your@email.com"/>
+      </div>
+    </div>
+
+    <div class="g-recaptcha" data-sitekey="6LdSw4IsAAAAANBnFoG56JSh3QCgX4U8LCmCvYXB"></div>
+
+    <br>
+
+    <button type="submit" class="submit-btn">
+      <i class='bx bx-mail-send'></i> Send OTP
+    </button>
+
+    <p class="switch-link">
+      <a href="login.html"><i class='bx bx-arrow-back'></i> Back to Login</a>
+    </p>
+
+  </form>
+</div>
+
+<!-- OTP MODAL -->
+<div id="otpModal" class="otp-modal">
+  <div class="otp-box">
+    <h3>Verify OTP</h3>
+    <p id="otpHint">Enter the 6-digit OTP sent to your email.</p>
+
+    <input id="otpInput" type="text" maxlength="6" placeholder="Enter OTP" />
+
+    <div class="otp-actions">
+      <button type="button" id="verifyOtpBtn">Verify OTP</button>
+      <button type="button" id="resendOtpBtn">Resend OTP</button>
+      <button type="button" id="otpBackBtn">Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESET PASSWORD MODAL -->
+<div id="resetPassModal" class="otp-modal">
+  <div class="otp-box">
+    <h3>Set New Password</h3>
+    <p>Enter your new password below.</p>
+
+    <div class="input-group">
+      <label>New Password</label>
+      <div class="input-wrap">
+        <i class='bx bx-lock'></i>
+        <input type="password" id="newPass" placeholder="New password" />
+        <button type="button" class="eye-btn" id="toggleNewPass">
+          <i class='bx bx-hide'></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label>Confirm Password</label>
+      <div class="input-wrap">
+        <i class='bx bx-lock-alt'></i>
+        <input type="password" id="confirmNewPass" placeholder="Confirm new password" />
+        <button type="button" class="eye-btn" id="toggleConfirmNewPass">
+          <i class='bx bx-hide'></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="otp-actions">
+      <button type="button" id="updatePasswordBtn">Update Password</button>
+      <button type="button" id="resetBackBtn">Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"></div>
+
+
+
+<script src="/js/forgot_passowrd.js"></script>
+</body>
+</html>

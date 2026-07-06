@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blood Center — Donate Blood, Save Lives</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <link rel="icon" type="image/png" href="/imgs/logo.png">
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-content">
+      <div class="lnav">
+        <div class="nav-logo-icon"><i class='bx bxs-droplet'></i></div>
+        <a href="index.html" class="brand-name">BLOOD CENTER</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="rnav" id="rnav">
+        <ul>
+          <li><a class="navbtn" href="index.html">Home</a></li>
+          <li><a class="navbtn" href="#about">About</a></li>
+          <li><a class="navbtn" href="/html/search.html" target="_blank">Find Donor</a></li>
+          <li><a class="navbtn" href="/html/request.html" target="_blank">Request Blood</a></li>
+          <li><a class="nav-login-btn" href="/html/login.html" target="_blank">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Donate Blood,<br/><span>Save Lives</span></h1>
+      <p>Your blood donation can give someone another chance at life.<br/>Join our community and help those in need.</p>
+      <div class="hero-buttons">
+        <a href="/html/register.html" class="btn-red" target="_blank">Become a Donor</a>
+        <a href="/html/search.html" class="btn-white" target="_blank">Find a Donor</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint">
+      <span>Scroll Down</span>
+      <i class='bx bx-chevron-down'></i>
+    </div>
+  </section>
+
+
+  <!-- WHAT WE OFFER -->
+  <section class="offers">
+    <h2 class="section-title">What We Offer</h2>
+    <div class="offers-grid">
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class='bx bx-search-alt'></i></div>
+        <h3>Find Blood Donors</h3>
+        <p>Quickly search for blood donors based on blood group and location.</p>
+        <a href="/html/search.html" target="_blank" class="card-link">Search Now →</a>
+      </div>
+
+      <div class="offer-card highlight">
+        <div class="offer-icon"><i class='bx bxs-droplet'></i></div>
+        <h3>Become a Donor</h3>
+        <p>Register yourself as a donor and be ready to save lives.</p>
+        <a href="/html/register.html" target="_blank" class="card-link light">Register Now →</a>
+      </div>
+
+      <div class="offer-card">
+        <div class="offer-icon"><i class='bx bx-heart'></i></div>
+        <h3>Emergency Help</h3>
+        <p>Submit an urgent blood request and get connected with donors quickly.</p>
+        <a href="/html/request.html" target="_blank" class="card-link">Request Now →</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-inner">
+
+      <div class="about-image">
+        <div class="about-img-box"><img src="/imgs/Blood_Donation_Poster.jpg" alt=""></div>
+      </div>
+
+      <div class="about-text">
+        <span class="tag">About Us</span>
+        <h2>Connecting Lives Through Blood Donation</h2>
+        <p>We aim to bridge the gap between blood donors and those in need. Our platform helps patients find donors quickly while encouraging a culture of voluntary blood donation.</p>
+        <p>Every drop counts. Every donor matters.</p>
+
+        <div class="about-points">
+          <div class="about-point">
+            <i class='bx bxs-droplet'></i>
+            <div>
+              <h4>Safe & Verified</h4>
+              <p>All donors follow health guidelines</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <i class='bx bxs-bolt' style="color:#16a34a"></i>
+            <div>
+              <h4>Fast Response</h4>
+              <p>Find donors within minutes</p>
+            </div>
+          </div>
+          <div class="about-point">
+            <i class='bx bxs-shield' style="color:#ea580c"></i>
+            <div>
+              <h4>Always Reliable</h4>
+              <p>Trusted by hospitals across the region</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="/html/register.html" target="_blank" class="btn-red">Join as a Donor</a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- STATS -->
+  <section class="stats">
+    <h2 class="section-title light">Our Impact</h2>
+    <div class="stats-grid">
+
+      <div class="stat-card">
+        <i class='bx bx-user-plus'></i>
+        <h3 id = "total-donors" class="counter" data-target="0">0</h3>
+        <p>Total Donors</p>
+      </div>
+
+      <div class="stat-card">
+        <i class='bx bxs-droplet'></i>
+        <h3 id = "available-donors" class="counter" data-target="0">0</h3>
+        <p>Available Donors</p>
+      </div>
+
+      <div class="stat-card">
+        <i class='bx bx-heart'></i>
+        <h3 id = "total-donations" class="counter" data-target="0">0</h3>
+        <p>Total Donations</p>
+      </div>
+
+      <div class="stat-card">
+        <i class='bx bx-shield-plus'></i>
+        <h3 id = "last-7-days-registered-donors" class="counter" data-target="0">0</h3>
+        <p>Donors Registered This Week</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- TOP DONORS -->
+  <section class="top-donors">
+    <h2 class="section-title-donors">Top Donors</h2>
+    <div class="donors-row" id = "top-donors-list">
+
+ 
+      <!-- <div class="donor-card gold">
+        <div class="donor-rank">🥇</div>
+        <div class="donor-avatar">KB</div>
+        <h3>Karan Barman</h3>
+        <span class="blood-tag">A+</span>
+        <p>12 Donations</p>
+      </div>
+
+      -->
+      
+
+    </div>
+  </section>
+
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+
+      <div class="contact-info">
+        <h2>Contact Us</h2>
+        <p>Have questions or need help? We're here for you.</p>
+        <div class="contact-detail">
+          <i class='bx bx-phone'></i>
+          <span>+91 xxxxxxxx07</span>
+        </div>
+        <div class="contact-detail">
+          <i class='bx bx-envelope'></i>
+          <span>donation.blood.system@gmail.com</span>
+        </div>
+        <div class="contact-detail">
+          <i class='bx bx-map'></i>
+          <span>Nalbari, Assam, India</span>
+        </div>
+      </div>
+
+
+
+
+      <form class="contact-form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cfName">Full Name</label>
+            <input type="text" id="cfName" name="name" placeholder="Your name" required/>
+          </div>
+          <div class="form-group">
+            <label for="cfPhone">Phone No.</label>
+            <input type="tel" id="cfPhone" name="phone" placeholder="+91 XXXXX XXXXX"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="cfEmail">Email</label>
+          <input type="email" id="cfEmail" name="email" placeholder="your@email.com" required/>
+        </div>
+        <div class="form-group">
+          <label for="cfMsg">Message</label>
+          <textarea id="cfMsg" name="message" rows="4" placeholder="How can we help?" required></textarea>
+        </div>
+        <div class="g-recaptcha" data-sitekey="6LdSw4IsAAAAANBnFoG56JSh3QCgX4U8LCmCvYXB"></div>
+        <button type="submit" class="btn-red full">
+          <i class='bx bx-send'></i> Send Message
+        </button>
+        <p class="form-success" id="formSuccess">✓ Message sent successfully!</p>
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <i class='bx bxs-droplet'></i> Blood Center
+        </div>
+        <p>Connecting blood donors with those in need. Every drop saves a life.</p>
+        <div class="footer-socials">
+          <a href="#"><i class='bx bxl-instagram'></i></a>
+          <a href="#"><i class='bx bxl-github'></i></a>
+          <a href="#"><i class='bx bxl-twitter'></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html" target="_blank">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="/html/search.html" target="_blank">Find Donor</a></li>
+          <li><a href="/html/request.html" target="_blank">Request Blood</a></li>
+          <li><a href="/html/register.html" target="_blank">Become a Donor</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4>Account</h4>
+        <ul>
+          <li><a href="/html/login.html" target="_blank">Login</a></li>
+          <li><a href="/html/register.html" target="_blank">Register</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-cta">
+        <h4>Ready to save a life?</h4>
+        <p>Join our donor community today.</p>
+        <a href="/html/register.html" target="_blank" class="btn-red">Register Now</a>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <!-- <p>© 2025 Blood Center. All rights reserved.</p>
+      <p>Made with <i class='bx bxs-heart' style="color:#C0152A"></i> for a college project</p> -->
+    </div>
+  </footer>
+
+   <div id="toast" class="toast"></div>
+
+  <script src="/js/index.js"></script>
+  <script src="/js/contact.js"></script>
+</body>
+</html>

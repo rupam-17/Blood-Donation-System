@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register — Blood Center</title>
+  <link rel="stylesheet" href="/css/auth.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</head>
+<body>
+
+<div class="auth-card" style="max-width:520px;">
+
+  <!-- Logo -->
+  <a href="/index.html" class="auth-logo">
+    <div class="auth-logo-icon"><i class='bx bxs-droplet'></i></div>
+    <span class="auth-logo-text">Blood<span>Center</span></span>
+  </a>
+
+  <h2 class="auth-title">Create Account</h2>
+  <p class="auth-sub">Register to become a blood donor</p>
+
+  <div class="msg-box" id="registerMsg"></div>
+
+  <form id="registerForm">
+
+    <!-- Profile photo -->
+    <div class="photo-upload-row">
+      <div class="photo-circle" id="photoPreview">
+        <i class='bx bx-user'></i>
+      </div>
+      <div class="photo-upload-info">
+        <label for="photoFile" class="photo-pick-btn">
+          <i class='bx bx-camera'></i> Upload Photo
+        </label>
+        <input type="file" id="photoFile" accept="image/*"/>
+        <p>Optional · JPG/PNG · Max 2MB</p>
+      </div>
+    </div>
+
+    <!-- Name + Age -->
+    <div class="two-col">
+      <div class="input-group">
+        <label>Full Name <span class="star">*</span></label>
+        <div class="input-wrap">
+          <i class='bx bx-user'></i>
+          <input type="text" id="rName" placeholder="Your full name"/>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Date of Birth <span class="star">*</span></label>
+        <div class="input-wrap">
+          <i class='bx bx-calendar'></i>
+          <input type="date" id="rDob" max=""/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email -->
+      <div class="input-group">
+        <label>Email <span class="star">*</span></label>
+        <div class="input-wrap">
+          <i class='bx bx-envelope'></i>
+          <input type="email" id="rEmail" placeholder="your@email.com"/>
+        </div>
+      </div>
+
+     <!-- Phone  -->
+      <div class="input-group">
+        <label>Phone <span class="star">*</span></label>
+        <div class="input-wrap">
+          <i class='bx bx-phone'></i>
+          <input type="tel" id="rPhone" placeholder="+91 XXXXX XXXXX"/>
+        </div>
+      </div>
+
+    <!-- Blood Group + Location -->
+    <div class="two-col">
+      
+      <div class="input-group">
+        <label>City / Location <span class="star">*</span></label>
+        <div class="input-wrap">
+          <i class='bx bx-map'></i>
+          <input type="text" id="rLocation" placeholder="e.g. Guwahati"/>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Blood Group <span class="star">*</span></label>
+        <div class="input-wrap">
+          <i class='bx bxs-droplet'></i>
+          <select id="rBlood">
+            <option value="" disabled selected>Select</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>O+</option><option>O-</option>
+            <option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Password + Confirm -->
+      <div class="input-group">
+        <label>Password <span class="star">*</span></label>
+        <div class="input-wrap">
+          <i class='bx bx-lock'></i>
+          <input type="password" id="rPass" placeholder="Min 6 characters"/>
+          <button type="button" class="eye-btn" id="toggleRPass">
+            <i class='bx bx-hide'></i>
+          </button>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Confirm Password <span class="star">*</span></label>
+        <div class="input-wrap">
+          <i class='bx bx-lock-alt'></i>
+          <input type="password" id="rConfirm" placeholder="Repeat password"/>
+          <button type="button" class="eye-btn" id="toggleRConfirm">
+            <i class='bx bx-hide'></i>
+          </button>
+        </div>
+      </div>
+
+    <!-- Terms -->
+    <div class="input-group">
+      <label class="check-label">
+        <input type="checkbox" id="rTerms"/>
+        I agree to the <a href="#">Terms & Conditions</a> and consent to donate blood
+      </label>
+    </div>
+
+    <!-- reCAPTCHA -->
+    <div class="captcha-row">
+      <div class="g-recaptcha" data-sitekey="6LdSw4IsAAAAANBnFoG56JSh3QCgX4U8LCmCvYXB"></div>
+    </div>
+
+
+    <button type="submit" class="submit-btn" id="registerBtn">
+      <i class='bx bx-user-plus'></i> Register as Donor
+    </button>
+
+    <p class="switch-link">
+      Already have an account? <a href="login.html">Login here</a>
+    </p>
+
+
+    
+  </form>
+</div>
+
+
+<!-- Pop Up -->
+<div id="otpModal" class="otp-modal">
+  <div class="otp-box">
+    <h3>Verify OTP</h3>
+    <p id="otpHint">Enter OTP sent to your email.</p>
+    <input id="otpInput" type="text" maxlength="6" placeholder="Enter 6-digit OTP">
+
+    <div class="otp-actions">
+      <button type="button" id="verifyOtpBtn">Verify OTP</button>
+      <button type="button" id="resendOtpBtn">Resend OTP</button>
+      <button type="button" id="otpBackBtn">Back</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+
+<script src="/js/registration.js"></script>
+</body>
+</html>

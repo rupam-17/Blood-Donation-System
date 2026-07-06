@@ -1,0 +1,613 @@
+/* ================================
+   BLOOD CENTER — auth.css
+   Simple centered card design
+================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --red:       #C0152A;
+  --red-dark:  #8B0E1E;
+  --red-light: #FDEAEC;
+  --white:     #FFFFFF;
+  --off-white: #F7F8FA;
+  --border:    #E5E7EB;
+  --text:      #1F2937;
+  --text-soft: #6B7280;
+  --green:     #16a34a;
+  --green-bg:  #dcfce7;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+a { text-decoration: none; color: inherit; }
+button { font-family: 'Poppins', sans-serif; cursor: pointer; }
+
+/* ================================
+   AUTH CARD
+================================ */
+
+.auth-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+
+/* Logo at top */
+.auth-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 1.8rem;
+  text-decoration: none;
+}
+
+.auth-logo-icon {
+  width: 38px; height: 38px;
+  background: var(--red);
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.auth-logo-text {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.auth-logo-text span { color: var(--red); }
+
+/* Title */
+.auth-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  text-align: center;
+}
+
+.auth-sub {
+  font-size: 0.84rem;
+  color: var(--text-soft);
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+
+/* ================================
+   LOGIN TOGGLE
+================================ */
+
+.login-toggle {
+  display: flex;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 3px;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 0.55rem 0.5rem;
+  border: none;
+  background: none;
+  border-radius: 7px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+
+.toggle-btn i { font-size: 0.95rem; }
+
+.toggle-btn.active {
+  background: var(--white);
+  color: var(--text);
+  box-shadow: 0 1px 5px rgba(0,0,0,0.08);
+}
+
+.toggle-btn.active.admin-btn { color: var(--red); }
+
+/* ================================
+   PROFILE PHOTO UPLOAD
+================================ */
+
+.photo-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--off-white);
+  border: 1.5px dashed var(--border);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.photo-circle {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem;
+  color: var(--text-soft);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.photo-circle img { width:100%; height:100%; object-fit:cover; }
+
+.photo-upload-info p {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  margin-top: 3px;
+}
+
+.photo-pick-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--red-light);
+  color: var(--red);
+  border: 1px solid rgba(192,21,42,0.2);
+  border-radius: 7px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.photo-pick-btn:hover { background: rgba(192,21,42,0.12); }
+#photoFile { display: none; }
+
+/* ================================
+   MESSAGE BOX
+================================ */
+
+.msg-box {
+  padding: 9px 13px;
+  border-radius: 8px;
+  font-size: 0.81rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+.msg-box.error   { background: var(--red-light); color: var(--red);   display: block; }
+.msg-box.success { background: var(--green-bg);  color: var(--green); display: block; }
+
+/* ================================
+   INPUT GROUPS
+================================ */
+
+.input-group { margin-bottom: 1rem; }
+
+.input-group label {
+  display: block;
+  font-size: 0.77rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  margin-bottom: 5px;
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 0 0.85rem;
+  transition: border-color 0.2s;
+}
+
+.input-wrap:focus-within { border-color: var(--red); background: white; }
+
+.input-wrap i {
+  font-size: 0.95rem;
+  color: #ccc;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+.input-wrap input,
+.input-wrap select {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0.7rem 0;
+  font-size: 0.87rem;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+}
+
+.input-wrap input::placeholder { color: #ccc; }
+
+.eye-btn {
+  background: none; border: none;
+  font-size: 0.95rem;
+  color: #ccc;
+  display: flex; align-items: center;
+  transition: color 0.2s;
+}
+
+.eye-btn:hover { color: var(--text-soft); }
+
+/* Two column grid */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+@media (max-width: 420px) {
+  .two-col { grid-template-columns: 1fr; }
+}
+
+/* ================================
+   CAPTCHA PLACEHOLDER
+================================ */
+
+.captcha-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 1rem;
+  font-size: 0.83rem;
+  color: var(--text);
+}
+
+.captcha-row input[type="checkbox"] {
+  width: 17px; height: 17px;
+  accent-color: var(--green);
+  flex-shrink: 0; cursor: pointer;
+}
+
+.captcha-row label { cursor: pointer; flex: 1; }
+
+.captcha-row img { height: 26px; margin-left: auto; }
+
+/* ================================
+   MISC ROW
+================================ */
+
+.row-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.check-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  font-size: 0.8rem;
+  color: var(--text-soft);
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.check-label input[type="checkbox"] {
+  width: 15px; height: 15px;
+  accent-color: var(--red);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.check-label a { color: var(--red); font-weight: 600; }
+
+.forgot-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--red);
+}
+.forgot-link:hover { opacity: 0.75; }
+
+/* ================================
+   SUBMIT BUTTON
+================================ */
+
+.submit-btn {
+  width: 100%;
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 0.85rem;
+  font-size: 0.93rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.submit-btn:hover { background: var(--red-dark); transform: translateY(-1px); }
+
+/* ================================
+   SWITCH LINK
+================================ */
+
+.switch-link {
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-soft);
+}
+
+.switch-link a { color: var(--red); font-weight: 600; }
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0.8rem 0;
+  font-size: 0.75rem;
+  color: var(--text-soft);
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* Star required */
+.star { color: var(--red); }
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 480px) {
+  .auth-card { padding: 2rem 1.2rem; border-radius: 12px; }
+  body { padding: 1rem; align-items: flex-start; padding-top: 2rem; }
+}
+
+
+
+/* Toast */
+.toast{
+  position: fixed;
+  top: 110px;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.96);
+
+  min-width: min(92vw, 320px);
+  max-width: min(92vw, 520px);
+  padding: 12px 16px;
+  border-radius: 12px;
+  text-align: center;
+
+  background: #ffffff; 
+  color: #020000;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.35);
+  border: 1px solid black;
+
+  z-index: 999999;     /* top-most layer */
+  opacity: 0;
+  visibility: hidden;  /* hidden when not used */
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+
+.toast.show{
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+/* ── OTP MODAL OVERLAY ── */
+.otp-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  z-index: 999;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.otp-modal.open {
+  display: flex;
+}
+
+/* ── OTP BOX ── */
+.otp-box {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.2rem 2rem;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: otpSlideIn 0.25s ease;
+}
+
+@keyframes otpSlideIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ── ICON (optional — add a div.otp-icon above h3 if you want) ── */
+.otp-box h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #1F2937;
+  margin-bottom: 0.4rem;
+}
+
+.otp-box p {
+  font-size: 0.85rem;
+  color: #6B7280;
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+/* ── OTP INPUT ── */
+#otpInput {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.4rem;
+  text-align: center;
+  border: 2px solid #E5E7EB;
+  border-radius: 10px;
+  outline: none;
+  background: #F7F8FA;
+  color: #1F2937;
+  font-family: inherit;
+  transition: border-color 0.2s, background 0.2s;
+  margin-bottom: 1.3rem;
+}
+
+#otpInput:focus {
+  border-color: #C0152A;
+  background: #ffffff;
+}
+
+#otpInput::placeholder {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: normal;
+  color: #ccc;
+}
+
+/* ── BUTTONS ── */
+.otp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+#verifyOtpBtn {
+  width: 100%;
+  padding: 0.8rem;
+  background: #C0152A;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+
+#verifyOtpBtn:hover {
+  background: #8B0E1E;
+  transform: translateY(-1px);
+}
+
+#resendOtpBtn {
+  width: 100%;
+  padding: 0.7rem;
+  background: transparent;
+  color: #C0152A;
+  border: 1.5px solid #C0152A;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+#resendOtpBtn:hover {
+  background: #FDEAEC;
+}
+
+#otpBackBtn {
+  width: 100%;
+  padding: 0.7rem;
+  background: transparent;
+  color: #6B7280;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 50px;
+  font-size: 0.88rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+#otpBackBtn:hover {
+  border-color: #9CA3AF;
+  color: #1F2937;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 420px) {
+  .otp-box {
+    padding: 1.8rem 1.2rem;
+  }
+}
+
+
+.toast{
+  position: fixed;
+  top: 110px;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.96);
+
+  min-width: min(92vw, 320px);
+  max-width: min(92vw, 520px);
+  padding: 12px 16px;
+  border-radius: 12px;
+  text-align: center;
+
+  background: #ffffff; 
+  color: #020000;
+  box-shadow: 0 14px 36px rgba(0,0,0,0.35);
+  border: 1px solid black;
+
+  z-index: 999999;     /* top-most layer */
+  opacity: 0;
+  visibility: hidden;  /* hidden when not used */
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+}
+
+.toast.show{
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, -50%) scale(1);
+}

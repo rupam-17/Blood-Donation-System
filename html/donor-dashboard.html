@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Dashboard — Blood Center</title>
+  <link rel="stylesheet" href="/css/donor.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <i class='bx bxs-droplet'></i>
+    <span>Blood<strong>Center</strong></span>
+  </div>
+
+  <p class="sidebar-label">MY ACCOUNT</p>
+  <nav>
+    <a href="#" class="nav-item active" data-section="overview">
+      <i class='bx bx-home-alt'></i><span>Overview</span>
+    </a>
+    <a href="#" class="nav-item" data-section="profile">
+      <i class='bx bx-user-circle'></i><span>My Profile</span>
+    </a>
+    <a href="#" class="nav-item" data-section="history">
+      <i class='bx bx-history'></i><span>Donation History</span>
+    </a>
+    <a href="#" class="nav-item" data-section="requests">
+      <i class='bx bx-heart'></i><span>Blood Requests</span>
+    </a>
+    <a href="#" class="nav-item" data-section="donors">
+      <i class='bx bx-search-alt'></i><span>Find Donors</span>
+    </a>
+    <a href="#" class="nav-item" data-section="notifications">
+      <i class='bx bx-bell'></i><span>Notifications</span>
+      <span class="nav-badge" id="notifBadge">3</span>
+    </a>
+  </nav>
+
+  <p class="sidebar-label">MORE</p>
+  <nav>
+    <a href="/index.html" class="nav-item">
+      <i class='bx bx-globe'></i><span>Go to Website</span>
+    </a>
+    <a href="login.html" class="nav-item">
+      <i class='bx bx-log-out'></i><span>Logout</span>
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="donor-mini-profile">
+      <div class="donor-avatar-sm" id="sidebarAvatar">RS</div>
+      <div>
+        <p class="donor-mini-name" id="sidebarName">Rahul Sharma</p>
+        <p class="donor-mini-blood" id="sidebarBlood">A+ · Guwahati</p>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn"><i class='bx bx-menu'></i></button>
+    <div class="topbar-title" id="topbarTitle">Overview</div>
+    <div class="topbar-right">
+      <div class="topbar-notif" data-section="notifications" id="notifBtn">
+        <i class='bx bx-bell'></i>
+        <span class="notif-dot" id="notifDot"></span>
+      </div>
+      <div class="topbar-user">
+        <div class="topbar-avatar" id="topbarAvatar">RS</div>
+        <span id="topbarName">Rahul</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ===== OVERVIEW ===== -->
+    <section class="section active" id="section-overview">
+
+      <div class="section-head">
+        <div>
+          <h1 id="welcomeMsg">Good morning, Rahul 👋</h1>
+          <p>Here's a summary of your donor activity.</p>
+        </div>
+        <div class="avail-toggle-wrap">
+          <span id="availLabel">Available</span>
+          <label class="toggle-switch">
+            <input type="checkbox" id="availToggle" checked/>
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stat-grid">
+        <div class="stat-card" style="--c:#C0152A">
+          <div class="stat-icon"><i class='bx bx-droplet'></i></div>
+          <div>
+            <h2 class="stat-num">5</h2>
+            <p class="stat-label">Total Donations</p>
+          </div>
+        </div>
+        <div class="stat-card" style="--c:#16a34a">
+          <div class="stat-icon"><i class='bx bx-calendar-check'></i></div>
+          <div>
+            <h2 class="stat-num">Oct 2024</h2>
+            <p class="stat-label">Last Donated</p>
+          </div>
+        </div>
+        <div class="stat-card" style="--c:#ea580c">
+          <div class="stat-icon"><i class='bx bx-time-five'></i></div>
+          <div>
+            <h2 class="stat-num" id="nextDonateDate">Jan 2025</h2>
+            <p class="stat-label">Next Eligible</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="quick-actions-wrap">
+        <h3 class="card-title">Quick Actions</h3>
+        <div class="quick-actions">
+          <button class="qa-btn" data-section="profile">
+            <i class='bx bx-edit'></i> Edit Profile
+          </button>
+          <button class="qa-btn" data-section="requests">
+            <i class='bx bx-heart'></i> Request Blood
+          </button>
+          <button class="qa-btn" data-section="donors">
+            <i class='bx bx-search-alt'></i> Find Donors
+          </button>
+        </div>
+      </div>
+
+      <!-- Two columns: recent donations + open requests -->
+      <div class="dash-row">
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Recent Donations</h3>
+            <button class="link-btn" data-section="history">View All →</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table" id="recentDonationsTable">
+              <thead>
+                <tr><th>Date</th><th>Location</th><th>Units</th><th>Status</th></tr>
+              </thead>
+              <tbody id="recentDonationsTbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <h3>Active Blood Requests</h3>
+            <button class="link-btn" data-section="requests">View All →</button>
+          </div>
+          <div id="activeRequestsList"></div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===== MY PROFILE ===== -->
+    <section class="section" id="section-profile">
+
+      <div class="section-head">
+        <div>
+          <h1>My Profile</h1>
+          <p>View and update your donor information.</p>
+        </div>
+      </div>
+
+      <div class="profile-layout">
+
+        <!-- Profile card left -->
+        <div class="card profile-card">
+          <div class="profile-avatar-wrap">
+            <div class="profile-avatar" id="profileAvatar">RS</div>
+            <label for="profilePhotoFile" class="profile-photo-btn">
+              <i class='bx bx-camera'></i>
+            </label>
+            <input type="file" id="profilePhotoFile" accept="image/*"/>
+          </div>
+          <h3 id="profileName">Rahul Sharma</h3>
+          <span class="blood-chip" id="profileBlood">A+</span>
+          <div class="profile-status-row">
+            <span id="profileStatusBadge" class="badge badge-green">Available</span>
+          </div>
+          <p class="profile-member-since">Member since Jan 2024</p>
+          <div class="profile-quick-info">
+            <div class="pqi"><i class='bx bx-phone'></i> <span id="pPhone">9876543210</span></div>
+            <div class="pqi"><i class='bx bx-envelope'></i> <span id="pEmail">rahul@gmail.com</span></div>
+            <div class="pqi"><i class='bx bx-map'></i> <span id="pLocation">Guwahati, Assam</span></div>
+          </div>
+        </div>
+
+        <!-- Edit form right -->
+        <div class="card" style="flex:1">
+          <h3 class="card-title" style="margin-bottom:1.2rem">Edit Details</h3>
+          <div class="msg-box" id="profileMsg"></div>
+          <form id="profileForm">
+            <div class="two-col-form">
+              <div class="form-field">
+                <label>Full Name</label>
+                <input type="text" id="pfName" value="Rahul Sharma"/>
+              </div>
+              <div class="form-field">
+                <label>Date of Birth</label>
+                <input type="date" id="pfAge" value="28" min="18" max="65"/>
+              </div>
+              <div class="form-field">
+                <label>Phone</label>
+                <input type="tel" id="pfPhone" value="9876543210"/>
+              </div>
+              <div class="form-field">
+                <label>Email</label>
+                <input type="email" id="pfEmail" value="rahul@gmail.com"/>
+              </div>
+              <div class="form-field">
+                <label>Blood Group</label>
+                <select id="pfBlood">
+                  <option>A+</option><option>A-</option>
+                  <option>B+</option><option>B-</option>
+                  <option>O+</option><option>O-</option>
+                  <option>AB+</option><option>AB-</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label>City / Location</label>
+                <input type="text" id="pfLocation" value="Guwahati, Assam"/>
+              </div>
+            </div>
+            <div class="form-field" style="margin-top:0.5rem">
+              <label>Availability Status</label>
+              <select id="pfAvail">
+                <option value="Available">Available</option>
+                <option value="Not Available">Not Available</option>
+              </select>
+            </div>
+            <div style="margin-top:1.2rem; display:flex; gap:0.8rem; flex-wrap:wrap;">
+              <button type="submit" class="btn-red">
+                <i class='bx bx-save'></i> Save Changes
+              </button>
+              <button type="button" class="btn-outline" id="changePassBtn">
+                <i class='bx bx-lock'></i> Change Password
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ===== DONATION HISTORY ===== -->
+    <section class="section" id="section-history">
+      <div class="section-head">
+        <div>
+          <h1>Donation History</h1>
+          <p>All your recorded blood donations.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th><th>Date</th><th>Hospital / Location</th>
+                <th>Units</th><th>Blood Group</th><th>Recorded By</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="donationHistoryTbody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state" id="historyEmpty" style="display:none">
+          <i class='bx bx-history'></i>
+          <p>No donation records yet.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== BLOOD REQUESTS ===== -->
+    <section class="section" id="section-requests">
+      <div class="section-head">
+        <div>
+          <h1>Blood Requests</h1>
+          <p>Submit a request or track existing ones.</p>
+        </div>
+        <button class="btn-red" id="newRequestBtn">
+          <i class='bx bx-plus'></i> New Request
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="filters-row">
+          <select id="reqFilterStatus" class="filter-select">
+            <option value="">All Status</option>
+            <option>Pending</option>
+            <option>Fulfilled</option>
+            <option>Cancelled</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th><th>Patient</th><th>Blood Group</th>
+                <th>Hospital</th><th>Date</th><th>Urgency</th>
+                <th>Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="myRequestsTbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ===== FIND DONORS ===== -->
+    <section class="section" id="section-donors">
+      <div class="section-head">
+        <div>
+          <h1>Find Donors</h1>
+          <p>Search for available donors by blood group or location.</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="search-form-row">
+          <div class="form-field">
+            <label>Blood Group</label>
+            <select id="fdBlood" class="filter-select">
+              <option value="">Any</option>
+              <option>A+</option><option>A-</option>
+              <option>B+</option><option>B-</option>
+              <option>O+</option><option>O-</option>
+              <option>AB+</option><option>AB-</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label>Location</label>
+            <input type="text" id="fdLocation" class="filter-input" placeholder="e.g. Guwahati"/>
+          </div>
+          <div class="form-field">
+            <label>Availability</label>
+            <select id="fdAvail" class="filter-select">
+              <option value="">Any</option>
+              <option value="Available">Available</option>
+            </select>
+          </div>
+          <button class="btn-red" id="fdSearchBtn" style="align-self:flex-end">
+            <i class='bx bx-search'></i> Search
+          </button>
+        </div>
+      </div>
+      <div class="donors-grid" id="fdGrid"></div>
+      <div class="empty-state" id="fdEmpty" style="display:none">
+        <i class='bx bx-search-alt'></i>
+        <p>No donors found. Try different filters.</p>
+      </div>
+    </section>
+
+
+    <!-- ===== NOTIFICATIONS ===== -->
+    <section class="section" id="section-notifications">
+      <div class="section-head">
+        <div>
+          <h1>Notifications</h1>
+          <p>Your latest alerts and emails from Blood Center.</p>
+        </div>
+        <button class="btn-outline" id="markAllReadBtn">Mark all as read</button>
+      </div>
+      <div class="card">
+        <ul class="notif-list" id="notifList"></ul>
+      </div>
+    </section>
+
+  </div><!-- end .content -->
+</div><!-- end .main -->
+
+
+<!-- MODAL: New Blood Request -->
+<div class="modal-overlay" id="requestModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>New Blood Request</h2>
+      <button class="modal-close" id="reqModalClose"><i class='bx bx-x'></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="msg-box" id="reqModalMsg"></div>
+      <div class="two-col-form">
+        <div class="form-field">
+          <label>Patient Name <span class="star">*</span></label>
+          <input type="text" id="rmPatient" placeholder="Patient's full name"/>
+        </div>
+        <div class="form-field">
+          <label>Blood Group <span class="star">*</span></label>
+          <select id="rmBlood">
+            <option value="" disabled selected>Select</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>O+</option><option>O-</option>
+            <option>AB+</option><option>AB-</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Hospital <span class="star">*</span></label>
+          <input type="text" id="rmHospital" placeholder="Hospital name"/>
+        </div>
+        <div class="form-field">
+          <label>Location <span class="star">*</span></label>
+          <input type="text" id="rmLocation" placeholder="City"/>
+        </div>
+        <div class="form-field">
+          <label>Contact <span class="star">*</span></label>
+          <input type="tel" id="rmContact" placeholder="Contact number"/>
+        </div>
+        <div class="form-field">
+          <label>Urgency</label>
+          <select id="rmUrgency">
+            <option value="Normal">Normal</option>
+            <option value="Urgent">Urgent</option>
+            <option value="Critical">Critical</option>
+          </select>
+        </div>
+      <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+      <small id="reqCaptchaMsg" style="display:none;color:#ef4444;">Please verify captcha.</small>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" id="reqModalCancel">Cancel</button>
+      <button class="btn-red" id="reqModalSubmit">
+        <i class='bx bx-send'></i> Submit Request
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL: Change Password -->
+<div class="modal-overlay" id="passModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h2>Change Password</h2>
+      <button class="modal-close" id="passModalClose"><i class='bx bx-x'></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="msg-box" id="passMsg"></div>
+      <div class="form-field" style="margin-bottom:1rem">
+        <label>Current Password</label>
+        <input type="password" id="curPass" placeholder="Current password"/>
+      </div>
+      <div class="form-field" style="margin-bottom:1rem">
+        <label>New Password</label>
+        <input type="password" id="newPass" placeholder="New password (min 6)"/>
+      </div>
+      <div class="form-field">
+        <label>Confirm New Password</label>
+        <input type="password" id="confPass" placeholder="Repeat new password"/>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-outline" id="passModalCancel">Cancel</button>
+      <button class="btn-red" id="passModalSubmit">Update Password</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<div class="toast" id="toast"></div>
+
+<script src="/js/donor-dashboard.js"></script>
+</body>
+</html>

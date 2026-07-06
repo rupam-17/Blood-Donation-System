@@ -1,0 +1,444 @@
+/* ================================
+   BLOOD CENTER — search.css
+   Search Donor page styles
+================================ */
+
+
+/* Active nav link highlight */
+.active-link {
+  background: var(--red-light) !important;
+  color: var(--red) !important;
+  border-radius: 30px;
+}
+
+
+/* ================================
+   PAGE HEADER
+================================ */
+
+.page-header {
+  background: linear-gradient(135deg, #111 0%, #1a0307 50%, #8B0E1E 100%);
+  padding: 7rem 2rem 3.5rem;
+  text-align: center;
+  position: relative;
+}
+
+/* Subtle dot pattern */
+.page-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.page-header-content {
+  position: relative;
+  z-index: 1;
+}
+
+.page-header h1 {
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.page-header p {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+}
+
+
+/* ================================
+   SEARCH FORM SECTION
+================================ */
+
+.search-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 1rem;
+}
+
+.search-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.8rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.search-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.search-card h3 i {
+  color: var(--red);
+  font-size: 1.1rem;
+}
+
+.search-form-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  min-width: 150px;
+}
+
+.form-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-soft);
+}
+
+.form-field input,
+.form-field select {
+  background: var(--off-white);
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  padding: 0.7rem 0.95rem;
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: var(--red);
+  background: white;
+}
+
+.form-field input::placeholder {
+  color: #ccc;
+}
+
+/* Search button */
+.btn-search {
+  background: var(--red);
+  color: white;
+  border: none;
+  border-radius: 9px;
+  padding: 0.7rem 1.8rem;
+  font-size: 0.92rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  align-self: flex-end;
+  white-space: nowrap;
+}
+
+.btn-search:hover {
+  background: var(--red-dark);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 650px) {
+  .btn-search { width: 100%; justify-content: center; }
+}
+
+
+/* ================================
+   RESULTS SECTION
+================================ */
+
+.results-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0.5rem 1.5rem 3rem;
+}
+
+/* Default / empty states */
+.state-box {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--text-soft);
+}
+
+.state-box i {
+  font-size: 3rem;
+  color: #ddd;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.state-box h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.4rem;
+}
+
+.state-box p {
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.state-box a {
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* Results top bar */
+.results-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  padding: 0 0.2rem;
+}
+
+.results-top p {
+  font-size: 0.88rem;
+  color: var(--text-soft);
+  font-weight: 500;
+}
+
+.clear-btn {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s;
+}
+
+.clear-btn:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+
+/* ================================
+   DONOR CARDS GRID
+================================ */
+
+.donors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 1.2rem;
+}
+
+.donor-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem 1.2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+}
+
+.donor-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-color: #ddd;
+}
+
+/* Avatar circle */
+.donor-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--red);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-bottom: 4px;
+}
+
+.donor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Name */
+.donor-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Location */
+.donor-location {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  justify-content: center;
+}
+
+/* Blood group tag */
+.blood-tag {
+  display: inline-block;
+  background: var(--red-light);
+  color: var(--red);
+  border: 1px solid rgba(192,21,42,0.2);
+  border-radius: 6px;
+  padding: 2px 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  font-family: monospace;
+  margin: 2px 0;
+}
+
+/* Info row inside card */
+.donor-info-row {
+  font-size: 0.79rem;
+  color: var(--text-soft);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 0.2rem;
+}
+
+.donor-info-row span { color: var(--text); font-weight: 500; }
+
+/* Divider inside card */
+.card-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  margin: 4px 0;
+}
+
+/* Phone number row */
+.donor-phone {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.donor-phone i { color: var(--red); }
+
+/* Status pill */
+.status-pill {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.73rem;
+  font-weight: 700;
+}
+
+.pill-available {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.pill-not-available {
+  background: #F3F4F6;
+  color: #6B7280;
+}
+
+/* Last donated row */
+.last-donated {
+  font-size: 0.74rem;
+  color: #aaa;
+}
+
+
+/* ================================
+   BOTTOM CTA SECTION
+================================ */
+
+.search-cta {
+  background: var(--gray);
+  border-top: 1px solid var(--border);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.search-cta-inner {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-cta h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+}
+
+.search-cta p {
+  font-size: 0.9rem;
+  color: var(--text-soft);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+
+/* ================================
+   RESPONSIVE
+================================ */
+
+@media (max-width: 600px) {
+  .search-form-row { flex-direction: column; }
+  .form-field       { min-width: 100%; }
+  .donors-grid      { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 400px) {
+  .donors-grid { grid-template-columns: 1fr; }
+}
+
+
+
+
+
+
+.results-table .act-btn{
+  border: none;
+  border-radius: 999px;
+  padding: 0.38rem 0.78rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
+  color: #fff;
+  cursor: pointer;
+  margin-right: 0.35rem;
+  transition: transform .15s ease, opacity .15s ease;
+}
+.results-table .act-btn:hover{ transform: translateY(-1px); opacity: .92; }
+.results-table .act-btn:disabled{ opacity: .65; cursor: not-allowed; transform:none; }
+
+.results-table .btn-fulfill{ background: #16a34a; } /* green */
+.results-table .btn-cancel{ background: var(--red); } /* red */

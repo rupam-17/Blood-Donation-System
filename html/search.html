@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Donor — Blood Center</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/search.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAVBAR (same as homepage) -->
+  <header id="navbar">
+    <div class="nav-content">
+      <div class="lnav">
+        <div class="nav-logo-icon"><i class='bx bxs-droplet'></i></div>
+        <a href="../index.html" class="brand-name">BLOOD CENTER</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="rnav" id="rnav">
+        <ul>
+          <li><a class="navbtn" href="../index.html">Home</a></li>
+          <li><a class="navbtn" href="#about">About</a></li>
+          <li><a class="navbtn active-link" href="search.html" target="_blank">Find Donor</a></li>
+          <li><a class="navbtn" href="request.html" target="_blank">Request Blood</a></li>
+          <li><a class="nav-login-btn" href="login.html" target="_blank">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <h1>Find a Blood Donor</h1>
+      <p>Search our database of registered donors by blood group and location.</p>
+    </div>
+  </div>
+
+
+  <!-- SEARCH FORM -->
+  <section class="search-section">
+    <div class="search-card">
+      <h3><i class='bx bx-filter-alt'></i> Search Filters</h3>
+      <div class="search-form-row">
+
+        <div class="form-field">
+          <label for="sBlood">Blood Group</label>
+          <select id="sBlood">
+            <option value="">All Blood Groups</option>
+            <option>A+</option>
+            <option>A-</option>
+            <option>B+</option>
+            <option>B-</option>
+            <option>O+</option>
+            <option>O-</option>
+            <option>AB+</option>
+            <option>AB-</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="sLocation">City / Location</label>
+          <input type="text" id="sLocation" placeholder="e.g. Guwahati"/>
+        </div>
+
+        <div class="form-field">
+          <label for="sAvail">Availability</label>
+          <select id="sAvail">
+            <option value="">Any</option>
+            <option value="Available">Available</option>
+            <option value="Not Available">Not Available</option>
+          </select>
+        </div>
+
+        <button class="btn-search" id="searchBtn">
+          <i class='bx bx-search'></i> Search
+        </button>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- RESULTS AREA -->
+  <section class="results-section">
+
+    <!-- Default message before search -->
+    <div class="state-box" id="defaultState">
+      <i class='bx bxs-droplet'></i>
+      <h3>Search for Donors</h3>
+      <p>Use the filters above to find blood donors by blood group or location.</p>
+    </div>
+
+    <!-- No results found -->
+    <div class="state-box" id="emptyState" style="display:none;">
+      <i class='bx bx-search-alt'></i>
+      <h3>No donors found</h3>
+      <p>Try a different blood group or location. You can also <a href="request.html">submit a blood request</a> and the admin will help find a match.</p>
+    </div>
+
+    <!-- Results count + clear -->
+    <div class="results-top" id="resultsTop" style="display:none;">
+      <p id="resultsCount"></p>
+      <button class="clear-btn" id="clearBtn"><i class='bx bx-x'></i> Clear</button>
+    </div>
+
+    <!-- Donor cards grid -->
+    <div class="donors-grid" id="donorsGrid"></div>
+
+  </section>
+
+
+  <!-- CTA BOTTOM -->
+  <section class="search-cta">
+    <div class="search-cta-inner">
+      <h2>Can't find the right donor?</h2>
+      <p>Submit a blood request and our admin will search the database and contact a matching donor for you.</p>
+      <a href="request.html" class="btn-red">Submit Blood Request</a>
+    </div>
+  </section>
+
+
+  <!-- FOOTER (simple) -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p><a href="/index.html" style="color:rgba(255,255,255,0.4);">← Back to Home</a></p>
+    </div>
+  </footer>
+
+
+  <script src="/js/index.js"></script>
+  <script src="/js/search.js"></script>
+</body>
+</html>

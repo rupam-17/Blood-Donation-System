@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Request Blood — Blood Center</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/request.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header id="navbar">
+    <div class="nav-content">
+      <div class="lnav">
+        <div class="nav-logo-icon"><i class='bx bxs-droplet'></i></div>
+        <a href="../index.html" class="brand-name">BLOOD CENTER</a>
+      </div>
+
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="rnav" id="rnav">
+        <ul>
+          <li><a class="navbtn" href="../index.html">Home</a></li>
+          <li><a class="navbtn" href="#about">About</a></li>
+          <li><a class="navbtn" href="search.html" target="_blank">Find Donor</a></li>
+          <li><a class="navbtn active-link" href="request.html" target="_blank">Request Blood</a></li>
+          <li><a class="nav-login-btn" href="login.html" target="_blank">Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="page-header-content">
+      <h1>Request Blood</h1>
+      <p>Fill in the form below. Our admin will find a matching donor and contact you as soon as possible.</p>
+      <button type="button" class="hero-btn" id="myRequestsBtn">
+        <i class='bx bx-list-ul'></i> My Requests
+      </button>
+    </div>
+  </div>
+
+
+  <!-- MAIN CONTENT -->
+  <section class="request-section">
+    <div class="request-layout">
+
+
+      <!-- FORM CARD -->
+      <div class="form-card">
+        <h3><i class='bx bx-edit-alt'></i> Submit Your Request</h3>
+
+        <!-- Success / error message -->
+        <div class="req-msg" id="reqMsg"></div>
+
+        <form id="requestForm">
+
+          <!-- Patient Name + Age -->
+          <div class="two-col">
+            <div class="field">
+              <label for="rPatient">Patient Name <span class="star">*</span></label>
+              <input type="text" id="rPatient" placeholder="Full name of patient"/>
+            </div>
+            <div class="field">
+              <label for="rAge">Patient Age <span class="star">*</span></label>
+              <input type="number" id="rAge" placeholder="Age" min="1" max="120"/>
+            </div>
+          </div>
+
+          <!-- Blood Group + Units -->
+          <div class="two-col">
+            <div class="field">
+              <label for="rBlood">Blood Group Required <span class="star">*</span></label>
+              <select id="rBlood">
+                <option value="" disabled selected>Select blood group</option>
+                <option>A+</option><option>A-</option>
+                <option>B+</option><option>B-</option>
+                <option>O+</option><option>O-</option>
+                <option>AB+</option><option>AB-</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="rUnits">Units Required <span class="star">*</span></label>
+              <input type="number" id="rUnits"  value="1"  min="1" max="10"/>
+            </div>
+          </div>
+
+          <!-- Hospital Name -->
+          <div class="field">
+            <label for="rHospital">Hospital Name <span class="star">*</span></label>
+            <input type="text" id="rHospital" placeholder="Name of the hospital"/>
+          </div>
+
+          <!-- Location -->
+          <div class="field">
+            <label for="rLocation">Hospital Location / City <span class="star">*</span></label>
+            <input type="text" id="rLocation" placeholder="e.g. Guwahati, Assam"/>
+          </div>
+
+          <!-- Contact Number -->
+          <div class="field">
+            <label for="rContact">Your Contact Number <span class="star">*</span></label>
+            <input type="tel" id="rContact" placeholder="+91 XXXXX XXXXX"/>
+          </div>
+
+          <!-- Email Address -->
+          <div class="field">
+            <label for="rEmail">Email Address <span class="star">*</span></label>
+            <input type="email" id="rEmail" placeholder="you@example.com"/>
+          </div>
+
+          <!-- Urgency Level -->
+          <div class="field">
+            <label for="rUrgency">Urgency Level <span class="star">*</span></label>
+            <div class="urgency-options">
+              <label class="urgency-radio">
+                <input type="radio" name="urgency" value="Normal" checked/>
+                <span class="urgency-pill normal">Normal</span>
+              </label>
+              <label class="urgency-radio">
+                <input type="radio" name="urgency" value="Urgent"/>
+                <span class="urgency-pill urgent">Urgent</span>
+              </label>
+              <label class="urgency-radio">
+                <input type="radio" name="urgency" value="Critical"/>
+                <span class="urgency-pill critical">Critical</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Additional Notes -->
+          <div class="field">
+            <label for="rNotes">Additional Notes</label>
+            <textarea id="rNotes" rows="3" placeholder="Any extra information (optional)"></textarea>
+          </div>
+
+          <!-- reCAPTCHA placeholder -->
+          <div class="captcha-wrap">
+            <div class="g-recaptcha" data-sitekey="6LdSw4IsAAAAANBnFoG56JSh3QCgX4U8LCmCvYXB"></div>
+
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class='bx bx-send'></i> Submit Request
+          </button>
+
+        </form>
+      </div>
+
+
+      <!-- SIDEBAR INFO -->
+      <div class="req-sidebar">
+
+        <!-- How it works -->
+        <div class="info-card">
+          <h4><i class='bx bx-info-circle'></i> How It Works</h4>
+          <ul class="steps-list">
+            <li>
+              <div class="step-num">1</div>
+              <div>
+                <strong>Submit the form</strong>
+                <p>Fill in your patient details and blood requirement.</p>
+              </div>
+            </li>
+            <li>
+              <div class="step-num">2</div>
+              <div>
+                <strong>Admin reviews</strong>
+                <p>Our admin searches the donor database for a match.</p>
+              </div>
+            </li>
+            <li>
+              <div class="step-num">3</div>
+              <div>
+                <strong>Get contacted</strong>
+                <p>A matching donor's contact is shared with you directly.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Emergency contact -->
+        <div class="info-card emergency-card">
+          <div class="emergency-icon"><i class='bx bx-phone'></i></div>
+          <h4>Emergency Helpline</h4>
+          <p>For life-threatening emergencies, call us directly:</p>
+          <a href="tel:+*****43210" class="emergency-phone">
+            <i class='bx bx-phone-call'></i> +91 ***** 43210
+          </a>
+        </div>
+
+        <!-- Urgency guide -->
+        <div class="info-card">
+          <h4><i class='bx bx-flag'></i> Urgency Guide</h4>
+          <div class="urgency-guide">
+            <div class="guide-item">
+              <span class="dot dot-green"></span>
+              <div>
+                <strong>Normal</strong>
+                <p>Required within a few days, no immediate rush.</p>
+              </div>
+            </div>
+            <div class="guide-item">
+              <span class="dot dot-orange"></span>
+              <div>
+                <strong>Urgent</strong>
+                <p>Required within the next 24 hours.</p>
+              </div>
+            </div>
+            <div class="guide-item">
+              <span class="dot dot-red"></span>
+              <div>
+                <strong>Critical</strong>
+                <p>Required immediately — life-threatening situation.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end sidebar -->
+
+    </div>
+  </section>
+
+
+  <!-- MODAL: My Requests -->
+  <div class="modal-overlay" id="myRequestsModal" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <h2>My Requests</h2>
+        <button class="modal-close" id="myRequestsModalClose" type="button"><i class='bx bx-x'></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="req-msg" id="myRequestsMsg"></div>
+        <p class="my-requests-text">Enter the email you used when submitting the request so we can look it up for you.</p>
+        <div class="field">
+          <label for="myRequestsEmail">Email Address / Phone No <span class="star">*</span></label>
+          <input type="text" id="myRequestsEmail" placeholder="Enter Email or Phone NO"/>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-soft" id="myRequestsCancel" type="button">Cancel</button>
+        <button class="btn-red" id="myRequestsSubmit" type="button">
+          <i class='bx bx-search'></i> Find Requests
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- MODAL: My Requests Results -->
+  <div class="modal-overlay" id="myRequestsResultsModal" aria-hidden="true">
+    <div class="modal modal-lg">
+      <div class="modal-head">
+        <h2>My Requests</h2>
+        <button class="modal-close" id="myRequestsResultsClose" type="button"><i class='bx bx-x'></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="results-summary">
+          <div>
+            <p class="results-eyebrow">Matched using email</p>
+            <h3 id="myRequestsResultsEmail">you@example.com</h3>
+          </div>
+          <div class="results-count" id="myRequestsResultsCount">0 requests</div>
+        </div>
+        <div class="results-table-wrap">
+          <table class="results-table">
+            <thead>
+              <tr>
+                <th>#</th><th>Patient</th><th>Blood Group</th><th>Hospital</th><th>Date</th><th>Urgency</th><th>Status</th><th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="myRequestsResultsBody"></tbody>
+          </table>
+        </div>
+        <div class="empty-state small" id="myRequestsResultsEmpty" style="display:none">
+          <i class='bx bx-file-blank'></i>
+          <p>No requests found for this email address.</p>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-soft" id="myRequestsResultsBack" type="button">Close</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p><a href="../index.html" style="color:rgba(255,255,255,0.4);">← Back to Home</a></p>
+    </div>
+  </footer>
+
+
+
+  <div class="modal-overlay" id="confirmModal" aria-hidden="true">
+    <div class="modal" style="max-width:420px;">
+      <div class="modal-head">
+        <h2 id="confirmTitle">Please Confirm</h2>
+        <button class="modal-close" id="confirmClose" type="button"><i class='bx bx-x'></i></button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmText" class="my-requests-text">Are you sure?</p>
+      </div>
+      <div class="modal-foot">
+        <button class="btn-soft" id="confirmNo" type="button">No</button>
+        <button class="btn-red" id="confirmYes" type="button">Yes</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="toast" class="toast"></div>
+
+  <script src="/js/index.js"></script>
+  <script src="/js/public_donor_requests.js"></script>
+</body>
+</html>
