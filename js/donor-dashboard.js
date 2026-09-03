@@ -882,6 +882,31 @@
       }
     });
 
+    $("removeProfilePhotoBtn")?.addEventListener("click", async () => {
+      if (!confirm("Remove your profile photo?")) return;
+
+      try {
+        const csrf = await getCsrfToken();
+        const fd = new FormData();
+
+        fd.append("action", "update_donor_profile");
+        fd.append("csrf_token", csrf);
+        fd.append("remove_photo", "1");
+
+        const result = await postText(API.server, fd);
+
+        if (result === "profile_updated") {
+          showToast("Profile photo removed.");
+          await loadProfile();
+        } else {
+          showToast(`Could not remove photo: ${result}`);
+        }
+      } catch (error) {
+        console.error(error);
+        showToast("Could not remove profile photo.");
+      }
+    });
+
     $("profileForm")?.addEventListener("submit", async (e) => {
       e.preventDefault();
       const btn = $("profileForm")?.querySelector("button[type='submit']");

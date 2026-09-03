@@ -996,6 +996,32 @@ function closeSidebar() {
 }
 
   function bindEvents() {
+    $("removeMyPhotoBtn")?.addEventListener("click", async () => {
+      if (!state.currentAdmin) return;
+
+      const confirmed = confirm("Remove your profile photo?");
+      if (!confirmed) return;
+
+      const fd = new FormData();
+      fd.append("action", "update_admin");
+      fd.append("admin_id", String(state.currentAdmin.id));
+      fd.append("admin_name", val("myName"));
+      fd.append("admin_phone", val("myPhone"));
+      fd.append("admin_email", val("myEmail"));
+      fd.append("admin_city", state.currentAdmin.admin_city || "Unknown");
+      fd.append("remove_photo", "1");
+
+      const result = await postAdmin(fd);
+
+      if (result === "admin_updated") {
+        showToast("Profile photo removed.");
+        await loadCurrentAdminFromSession();
+        renderTopbarDate();
+      } else {
+        showToast(`Could not remove photo: ${result}`);
+      }
+    });
+
     $("menuBtn")?.addEventListener("click", () => {
     const sidebar = $("sidebar");
     if (!sidebar) return;
