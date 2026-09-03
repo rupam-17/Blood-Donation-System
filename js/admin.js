@@ -976,11 +976,43 @@ let _confirmAction = null;
     $("msgModal")?.classList.remove("open");
   }
 
+  function openSidebar() {
+  const sidebar = $("sidebar");
+  if (!sidebar) return;
+
+  sidebar.classList.add("open");
+
+  if (!document.querySelector(".sidebar-overlay")) {
+    const overlay = document.createElement("div");
+    overlay.className = "sidebar-overlay show";
+    overlay.addEventListener("click", closeSidebar);
+    document.body.appendChild(overlay);
+  }
+}
+
+function closeSidebar() {
+  $("sidebar")?.classList.remove("open");
+  document.querySelector(".sidebar-overlay")?.remove();
+}
+
   function bindEvents() {
-    $("menuBtn")?.addEventListener("click", () => $("sidebar")?.classList.toggle("open"));
+    $("menuBtn")?.addEventListener("click", () => {
+    const sidebar = $("sidebar");
+    if (!sidebar) return;
+
+    if (sidebar.classList.contains("open")) {
+        closeSidebar();
+      } else {
+        openSidebar();
+      }
+    });
     $$(".nav-item[data-section], [data-goto]").forEach((e) => e.addEventListener("click", (ev) => {
       ev.preventDefault();
       switchSection(e.dataset.section || e.dataset.goto);
+
+      if (window.innerWidth <= 800) {
+        closeSidebar();
+      }
     }));
 
     $("donorSearch")?.addEventListener("input", () => { state.donorPage = 1; renderDonorsTable(); });
