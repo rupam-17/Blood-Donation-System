@@ -93,7 +93,7 @@ button { font-family:'Poppins',sans-serif; cursor:pointer; }
    MAIN + TOPBAR
 ================================ */
 
-.main { margin-left:var(--sidebar-w); flex:1; display:flex; flex-direction:column; min-height:100vh; }
+.main { margin-left:var(--sidebar-w); flex:1; min-width:0; display:flex; flex-direction:column; min-height:100vh; }
 
 .topbar {
   height:58px; background:var(--white);
@@ -464,6 +464,8 @@ textarea.input { resize:vertical; }
   .two-col-sm{grid-template-columns:1fr;}
   .record-layout{flex-direction:column;}
   .profile-layout{flex-direction:column;}
+  .record-layout > .card,
+  .profile-layout > .card{width:100%;max-width:none;min-width:0;}
 }
 @media (max-width:480px) { .stat-grid{grid-template-columns:1fr;} .content{padding:1rem;} .otp-digit{width:38px;height:42px;} }
 
