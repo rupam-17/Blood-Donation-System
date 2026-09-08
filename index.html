@@ -40,12 +40,17 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="hero-content">
+      <p class="hero-kicker">Community Blood Network</p>
       <h1>Donate Blood,<br/><span>Save Lives</span></h1>
-      <p>Your blood donation can give someone another chance at life.<br/>Join our community and help those in need.</p>
+      <p>Your blood donation can give someone another chance at life.<br class="hide-mobile"/>Join our community and help those in need.</p>
       <div class="hero-buttons">
         <a href="/html/register.html" class="btn-red" target="_blank">Become a Donor</a>
         <a href="/html/search.html" class="btn-white" target="_blank">Find a Donor</a>
+      </div>
+      <div class="hero-pills" aria-hidden="true">
+        <span>A+</span><span>A-</span><span>B+</span><span>B-</span><span>O+</span><span>O-</span><span>AB+</span><span>AB-</span>
       </div>
     </div>
 
@@ -91,7 +96,7 @@
     <div class="about-inner">
 
       <div class="about-image">
-        <div class="about-img-box"><img src="/imgs/Blood_Donation_Poster.jpg" alt=""></div>
+        <div class="about-img-box"><img src="/imgs/Blood_Donation_Poster.jpg" alt="Blood donation campaign poster"></div>
       </div>
 
       <div class="about-text">
@@ -228,7 +233,9 @@
           <label for="cfMsg">Message</label>
           <textarea id="cfMsg" name="message" rows="4" placeholder="How can we help?" required></textarea>
         </div>
-        <div class="g-recaptcha" data-sitekey="6LdSw4IsAAAAANBnFoG56JSh3QCgX4U8LCmCvYXB"></div>
+        <div class="recaptcha-wrap">
+          <div class="g-recaptcha" data-sitekey="6LdSw4IsAAAAANBnFoG56JSh3QCgX4U8LCmCvYXB"></div>
+        </div>
         <button type="submit" class="btn-red full">
           <i class='bx bx-send'></i> Send Message
         </button>
