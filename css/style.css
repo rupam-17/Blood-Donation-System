@@ -704,6 +704,9 @@ header {
 
 /* Contact form */
 .contact-form {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   background: rgba(255,255,255,0.07);
   border: 1px solid rgba(255,255,255,0.12);
   border-radius: 16px;
@@ -733,6 +736,9 @@ header {
 
 .form-group input,
 .form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 9px;
@@ -770,7 +776,7 @@ header {
   display: block;
 }
 
-@media (max-width: 750px) {
+@media (max-width: 900px) {
   .contact-inner {
     grid-template-columns: 1fr;
   }
